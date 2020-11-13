@@ -43,10 +43,15 @@ public final class TtlExecutors {
      */
     @Nullable
     public static Executor getTtlExecutor(@Nullable Executor executor) {
+        return getTtlExecutor(executor, false);
+    }
+
+    @Nullable
+    public static Executor getTtlExecutor(@Nullable Executor executor, boolean idempotent) {
         if (TtlAgent.isTtlAgentLoaded() || null == executor || executor instanceof TtlEnhanced) {
             return executor;
         }
-        return new ExecutorTtlWrapper(executor, false);
+        return new ExecutorTtlWrapper(executor, idempotent);
     }
 
     /**
@@ -56,10 +61,15 @@ public final class TtlExecutors {
      */
     @Nullable
     public static ExecutorService getTtlExecutorService(@Nullable ExecutorService executorService) {
+        return getTtlExecutorService(executorService, false);
+    }
+
+    @Nullable
+    public static ExecutorService getTtlExecutorService(@Nullable ExecutorService executorService, boolean idempotent) {
         if (TtlAgent.isTtlAgentLoaded() || executorService == null || executorService instanceof TtlEnhanced) {
             return executorService;
         }
-        return new ExecutorServiceTtlWrapper(executorService, false);
+        return new ExecutorServiceTtlWrapper(executorService, idempotent);
     }
 
     /**
@@ -69,10 +79,15 @@ public final class TtlExecutors {
      */
     @Nullable
     public static ScheduledExecutorService getTtlScheduledExecutorService(@Nullable ScheduledExecutorService scheduledExecutorService) {
+        return getTtlScheduledExecutorService(scheduledExecutorService, false);
+    }
+
+    @Nullable
+    public static ScheduledExecutorService getTtlScheduledExecutorService(@Nullable ScheduledExecutorService scheduledExecutorService, boolean idempotent) {
         if (TtlAgent.isTtlAgentLoaded() || scheduledExecutorService == null || scheduledExecutorService instanceof TtlEnhanced) {
             return scheduledExecutorService;
         }
-        return new ScheduledExecutorServiceTtlWrapper(scheduledExecutorService, false);
+        return new ScheduledExecutorServiceTtlWrapper(scheduledExecutorService, idempotent);
     }
 
     /**
